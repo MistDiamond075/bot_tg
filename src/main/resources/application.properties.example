@@ -1,0 +1,11 @@
+db.url=${URL}
+db.user=${USERNAME}
+db.password=${PASSWORD}
+tg.bot.token=${TOKEN}
+tg.bot.name=${NAME}
+path.files.all=${PATH}
+path.files.animations=${PATH}
+path.files.result.rare=${PATH}
+path.files.result.epic=${PATH}
+path.files.result.legendary=${PATH}
+path.files.result.banner=${PATH}

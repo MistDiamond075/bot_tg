@@ -1,0 +1,47 @@
+/* void AddUser(Long user_id){
+        if((!User_inventory.containsKey(user_id))||(User_inventory.isEmpty())){/*Inventory_list=new LinkedList<>();*//*User_inventory.put(user_id,Inventory_list);}
+    }*/
+
+   /* void LoadUserFromDB(Long uid){
+            String str="";
+            int list_cnt=0;
+            int item_iterator=1;
+            int userID;
+                try {
+                    Statement stmt = conn.createStatement();
+                    str = "select inventory_id from user where userID=" + uid;
+                    ResultSet userIDres = stmt.executeQuery(str);
+                    userIDres.next();
+                    userID = userIDres.getInt("inventory_id");
+                    str = "select*from inventory where id=" + userID;
+                    ResultSet inv_get = stmt.executeQuery(str);
+                    System.out.println("----------------------------------");
+                    File dir = new File("C:\\Users\\egoru\\IdeaProjects\\bot_tg_test\\files\\pics\\wish\\4star_char"); //path указывает на директорию
+                    int k = 1;
+                    while ((inv_get.next()) && (list_cnt < Inventory_list.size())) {
+                        while (k >= 0) {
+                            for (File file : dir.listFiles()) {
+                                if (file.isFile())
+                                    if (k == 1) {Inventory_list.set(list_cnt, inv_get.getInt(file.getName().substring(0,file.getName().length()-4)));}
+                                else if (k == 0){Inventory_list.set(list_cnt, inv_get.getInt(file.getName().substring(0,file.getName().length()-4)));}
+                            }
+                        k--;
+                            if(k==0){dir = new File("C:\\Users\\egoru\\IdeaProjects\\bot_tg_test\\files\\pics\\wish\\5star_char");}
+                        }
+                    }
+                    stmt.close();
+                }
+                catch (SQLException e) {throw new RuntimeException(e);}
+            /*try(FileReader reader = new FileReader("C://Users/egoru/IdeaProjects/bot_tg_test/files/"+uid+"/inv_char.txt"))
+            {
+                // читаем посимвольно
+                int c;
+                while((c=reader.read())!=-1){
+                    if((char)c!='\n') {str+=(char) c;}
+                    else{Inventory_list.add(str);str="";}
+                }
+                Inventory_list.add(str);
+            }
+            catch(IOException ex){System.out.println(ex.getMessage());}*/
+           /* AddUser(uid);
+    }*/

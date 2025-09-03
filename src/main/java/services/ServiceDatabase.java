@@ -3,27 +3,37 @@ package services;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import configuration.ConfApp;
+import exception.DatabaseException;
 
 import java.sql.*;
 
-public class ServiceDataBase {
-    private final HikariConfig config = new HikariConfig();
+public class ServiceDatabase {
     private final HikariDataSource ds;
 
-    public ServiceDataBase(){
+    private ServiceDatabase(){
+        HikariConfig config = new HikariConfig();
         config.setDriverClassName("com.mysql.jdbc.Driver");
         config.setMaximumPoolSize(10);
         config.setJdbcUrl(ConfApp.get("db.url"));
         config.setUsername(ConfApp.get("db.user"));
         config.setPassword(ConfApp.get("db.password"));
+        config.setAutoCommit(false);
         ds = new HikariDataSource(config);
     }
 
-    public Connection getConnection(){
+    private static class ServiceDatabaseHolder{
+        private static final ServiceDatabase INSTANCE=new ServiceDatabase();
+    }
+
+    public Connection getConnection() throws DatabaseException {
         try {
             return ds.getConnection();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DatabaseException(e);
         }
+    }
+
+    public static ServiceDatabase getInstance(){
+        return ServiceDatabaseHolder.INSTANCE;
     }
 }

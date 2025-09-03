@@ -1,11 +1,34 @@
+#database server url (for example, jdbc:mysql://ip:port/databaseName)
 db.url=${URL}
+#login for database server
 db.user=${USERNAME}
+#password for database server
 db.password=${PASSWORD}
+#bot token
 tg.bot.token=${TOKEN}
+#bot name
 tg.bot.name=${NAME}
-path.files.all=${PATH}
-path.files.animations=${PATH}
-path.files.result.rare=${PATH}
-path.files.result.epic=${PATH}
-path.files.result.legendary=${PATH}
-path.files.result.banner=${PATH}
+#user can open single case per one request
+case.result.single=false
+#user can open multiple cases per one request
+case.result.multiple=true
+#if case.result.multiple=true, how many results can be returned per one request
+case.result.maxResultsPerRequest=10
+#items drop rates in format percents|rank
+case.result.rates=3|S,16|A,81|B
+#items drop guarantee in format openedCasesCount|rank (leave empty, if guarantee isn't provided)
+case.result.guarantee=90|S,10|A
+#path to single case constant animation (leave empty, if user cant open single case) in format path|rank
+case.result.anim.singleResult.path=
+#path to multiple cases constant animation (leave empty, if user cant open multiple cases) in format path|rank
+case.result.anim.multipleResults.path=https://i.imgur.com/0h45nq7.gif|A,https://imgur.com/fpeYMCn.gif|S
+#width of final result image
+case.result.finalImage.width=880
+#height of final result image
+case.result.finalImage.height=440
+#path to all constant animations
+path.files.animations=/src/files/pics/wish/anims
+#path to possible results in format path|rank
+path.files.singleResult=/src/files/pics/wish/3star_all|B,/src/files/pics/wish/4star_all|A,/src/files/pics/wish/5star_all|A
+#spliterator for configuration pairs, you can replace it if default spliterator conflicts with paths
+properties.pairs.spliterator=|

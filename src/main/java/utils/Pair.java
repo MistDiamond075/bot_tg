@@ -2,7 +2,7 @@ package utils;
 
 import java.util.Objects;
 
-public final class Pair<K,V>{
+public class Pair<K,V>{
     public K first;
     public V second;
 

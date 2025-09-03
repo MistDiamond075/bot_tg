@@ -63,7 +63,7 @@ public class Bot implements LongPollingBot {
                         chatID = inMess.getChatId();
                         user_id = update.getMessage().getFrom().getId();
                         user_name = update.getMessage().getFrom().getUserName();
-                        String response = GetUsrMessage(inMess.getText(),user_id,chatID,pic_file,gif_file,user_name);
+                        String response = GetUsrMessage(inMess.getText(),user_id,chatID, user_name);
                         if(!userSendFiles.isEmpty()){
                             pic_file=userSendFiles.get(user_id).get(0);
                         gif_file=userSendFiles.get(user_id).get(1);
@@ -118,7 +118,7 @@ public class Bot implements LongPollingBot {
             });
         th.start();
     }
-    public String GetUsrMessage(String textMsg,Long user_id,Long chatID,InputFile pic_file,InputFile gif_file,String user_name) {
+    public String GetUsrMessage(String textMsg, Long user_id, Long chatID, String user_name) {
         String response=null;
         String banner_name="";
         String str="";
@@ -143,11 +143,12 @@ public class Bot implements LongPollingBot {
                     if(banner_name.equals("Нет последних открытых баннеров")){return banner_name;}
                     System.out.println("="+banner_name);
                     storage.LoadPic(banner_name);
-                    pic_file = new InputFile(new File(storage.CreateCaseResult(user_id)));
-                    gif_file = storage.getStar4GIF();
-                    userFiles.set(0,pic_file);
-                    if (gif_file == null){gif_file = storage.getStar5GIF();}
-                    userFiles.set(1,gif_file);
+                    InputFile pic_file = new InputFile(new File(storage.CreateCaseResult(user_id)));
+                    InputFile gif_file = storage.getStar4GIF();
+                    userFiles.set(0, pic_file);
+                    if (gif_file == null){
+                        gif_file = storage.getStar5GIF();}
+                    userFiles.set(1, gif_file);
                     storage.AddUserInvToDB(user_id, chatID, user_name);
                     userSendFiles.put(user_id,userFiles);
                 }

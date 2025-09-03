@@ -1,3 +1,5 @@
+import configuration.ConfApp;
+import exception.ConfigurationException;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -11,12 +13,22 @@ public class Main {
     private final static Logger logger = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
-            try {
+        try {
+            ConfApp.load();
+        } catch (ConfigurationException e) {
+            System.err.println("ConfigurationException: " + e.getMessage());
+            System.exit(1);
+        }
+        try {
                 TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
                 telegramBotsApi.registerBot(new Bot());
             } catch (TelegramApiException e) {
                 logger.severe(e.getMessage());
             }
+        }
+
+        private static void init(){
+
         }
 }
 
